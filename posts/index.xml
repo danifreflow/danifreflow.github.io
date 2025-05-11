@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</title>
+    <link>https://danielfernandezcalvoCV.github.io/posts/</link>
+    <description>Recent content in Posts on Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</description>
+    <generator>Hugo -- 0.147.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 08 May 2025 16:42:18 +0200</lastBuildDate>
+    <atom:link href="https://danielfernandezcalvoCV.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Migracion de máquinas en Proxmox sin clusterizar</title>
+      <link>https://danielfernandezcalvoCV.github.io/posts/proxmoxmigration/</link>
+      <pubDate>Thu, 08 May 2025 16:42:18 +0200</pubDate>
+      <guid>https://danielfernandezcalvoCV.github.io/posts/proxmoxmigration/</guid>
+      <description>&lt;p&gt;Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores.
+Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para
+pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas
+virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.&lt;/p&gt;
+&lt;h2 id=&#34;pasos-a-seguir-para-migrar-maquinas-en-proxmox&#34;&gt;Pasos a seguir para migrar maquinas en proxmox&lt;/h2&gt;
+&lt;p&gt;Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es
+&lt;strong&gt;192.168.0.2&lt;/strong&gt; y la ip del segundo ordenador es &lt;strong&gt;192.168.0.150&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
