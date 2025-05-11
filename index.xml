@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Inicio on Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</title>
-    <link>https://danielfernandezcalvoCV.github.io/</link>
+    <link>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/</link>
     <description>Recent content in Inicio on Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</description>
     <generator>Hugo -- 0.147.2</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 08 May 2025 16:42:18 +0200</lastBuildDate>
-    <atom:link href="https://danielfernandezcalvoCV.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Migracion de máquinas en Proxmox sin clusterizar</title>
-      <link>https://danielfernandezcalvoCV.github.io/posts/proxmoxmigration/</link>
+      <link>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/proxmoxmigration/</link>
       <pubDate>Thu, 08 May 2025 16:42:18 +0200</pubDate>
-      <guid>https://danielfernandezcalvoCV.github.io/posts/proxmoxmigration/</guid>
+      <guid>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/proxmoxmigration/</guid>
       <description>&lt;p&gt;Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores.
 Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para
 pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas
@@ -23,33 +23,33 @@ virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.&lt
     </item>
     <item>
       <title>CV Infográfico</title>
-      <link>https://danielfernandezcalvoCV.github.io/cv-infografico/</link>
+      <link>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/cv-infografico/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://danielfernandezcalvoCV.github.io/cv-infografico/</guid>
+      <guid>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/cv-infografico/</guid>
       <description>&lt;p&gt;Aquí irá la versión visual o web de tu CV infográfico.&lt;/p&gt;</description>
     </item>
     <item>
       <title>CV Tradicional</title>
-      <link>https://danielfernandezcalvoCV.github.io/cv-tradicional/</link>
+      <link>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/cv-tradicional/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://danielfernandezcalvoCV.github.io/cv-tradicional/</guid>
+      <guid>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/cv-tradicional/</guid>
       <description>&lt;div style=&#34;flex: 1 1 180px; min-width: 180px;&#34;&gt;
-  &lt;img src=&#34;https://danielfernandezcalvoCV.github.io/images/yo.jpeg&#34; alt=&#34;Foto de Daniel Fernández&#34; style=&#34;width: 180px; height: 180px; border-radius: 50%; object-fit: cover;&#34;&gt;
+  &lt;img src=&#34;https://danifreflow.github.io/danielfernandezcalvoCV.github.io/images/yo.jpeg&#34; alt=&#34;Foto de Daniel Fernández&#34; style=&#34;width: 180px; height: 180px; border-radius: 50%; object-fit: cover;&#34;&gt;
   &lt;div style=&#34;margin-top: 1rem; display: flex; gap: 0.5rem;&#34;&gt;
     &lt;a href=&#34;mailto:d.fernandez@cirqlr.es&#34;&gt;
-      &lt;img src=&#34;https://danielfernandezcalvoCV.github.io/images/email.jpg&#34; alt=&#34;Email&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
+      &lt;img src=&#34;https://danifreflow.github.io/danielfernandezcalvoCV.github.io/images/email.jpg&#34; alt=&#34;Email&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
     &lt;/a&gt;
     &lt;a href=&#34;https://github.com/danifreflow&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://danielfernandezcalvoCV.github.io/images/GitHub-Mark-ea2971cee799.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
+      &lt;img src=&#34;https://danifreflow.github.io/danielfernandezcalvoCV.github.io/images/GitHub-Mark-ea2971cee799.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
     &lt;/a&gt;
     &lt;a href=&#34;https://www.linkedin.com/in/daniel-fernández-43775723b&#34; target=&#34;_blank&#34;&gt;
-      &lt;img src=&#34;https://danielfernandezcalvoCV.github.io/images/linkedIn.jpg&#34; alt=&#34;LinkedIn&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
+      &lt;img src=&#34;https://danifreflow.github.io/danielfernandezcalvoCV.github.io/images/linkedIn.jpg&#34; alt=&#34;LinkedIn&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
     &lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
   &lt;div style=&#34;flex: 1 1 auto; min-width: 200px; display: flex; justify-content: flex-end; align-items: center;&#34;&gt;
-    &lt;a href=&#34;https://danielfernandezcalvoCV.github.io/pdf/DanielCV.pdf&#34; download style=&#34;
+    &lt;a href=&#34;https://danifreflow.github.io/danielfernandezcalvoCV.github.io/pdf/DanielCV.pdf&#34; download style=&#34;
       padding: 0.6em 1.2em;
       background-color: #000000;
       color: white;
@@ -67,9 +67,9 @@ virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.&lt
     </item>
     <item>
       <title>VideoCurrículum</title>
-      <link>https://danielfernandezcalvoCV.github.io/video-cv/</link>
+      <link>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/video-cv/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://danielfernandezcalvoCV.github.io/video-cv/</guid>
+      <guid>https://danifreflow.github.io/danielfernandezcalvoCV.github.io/video-cv/</guid>
       <description>&lt;p&gt;Aquí puedes incrustar un video de YouTube, Vimeo, o local.&lt;/p&gt;</description>
     </item>
   </channel>
