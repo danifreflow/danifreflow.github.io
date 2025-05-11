@@ -15,16 +15,16 @@ Pasos a seguir para migrar maquinas en proxmox
 Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es
 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150">
 <meta name="author" content="">
-<link rel="canonical" href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/proxmoxmigration/">
-<link crossorigin="anonymous" href="../../danielfernandezcalvoCV.github.io/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/apple-touch-icon.png">
-<link rel="mask-icon" href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/safari-pinned-tab.svg">
+<link rel="canonical" href="/posts/proxmoxmigration/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="mask-icon" href="/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/proxmoxmigration/">
+<link rel="alternate" hreflang="en" href="/posts/proxmoxmigration/">
 <noscript>
     <style>
         #theme-toggle,
@@ -61,7 +61,7 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
         }
 
     </style>
-</noscript><meta property="og:url" content="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/proxmoxmigration/">
+</noscript><meta property="og:url" content="/posts/proxmoxmigration/">
   <meta property="og:site_name" content="Daniel Fernández Calvo - sistemas infórmaticos y arquitectura">
   <meta property="og:title" content="Migracion de máquinas en Proxmox sin clusterizar">
   <meta property="og:description" content="Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores. Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.
@@ -91,13 +91,13 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
       "@type": "ListItem",
       "position":  1 ,
       "name": "Posts",
-      "item": "https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/"
-    }, 
+      "item": "/posts/"
+    }
     {
       "@type": "ListItem",
-      "position":  2 ,
+      "position":  1 ,
       "name": "Migracion de máquinas en Proxmox sin clusterizar",
-      "item": "https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/proxmoxmigration/"
+      "item": "/posts/proxmoxmigration/"
     }
   ]
 }
@@ -119,14 +119,14 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
   "dateModified": "2025-05-08T16:42:18+02:00",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://danifreflow.github.io/danielfernandezcalvoCV.github.io/posts/proxmoxmigration/"
+    "@id": "/posts/proxmoxmigration/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Daniel Fernández Calvo - sistemas infórmaticos y arquitectura",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://danifreflow.github.io/danielfernandezcalvoCV.github.io/favicon.ico"
+      "url": "/favicon.ico"
     }
   }
 }
@@ -148,7 +148,7 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/" accesskey="h" title="Daniel Fernández Calvo - sistemas infórmaticos y arquitectura (Alt + H)">Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</a>
+            <a href="/" accesskey="h" title="Daniel Fernández Calvo - sistemas infórmaticos y arquitectura (Alt + H)">Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -174,27 +174,27 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
         </div>
         <ul id="menu">
             <li>
-                <a href="https://danifreflow.github.io/" title="Inicio">
+                <a href="/" title="Inicio">
                     <span>Inicio</span>
                 </a>
             </li>
             <li>
-                <a href="https://danifreflow.github.io/cv-tradicional/" title="CV Tradicional">
+                <a href="/cv-tradicional/" title="CV Tradicional">
                     <span>CV Tradicional</span>
                 </a>
             </li>
             <li>
-                <a href="https://danifreflow.github.io/cv-infografico/" title="CV Infográfico">
+                <a href="/cv-infografico/" title="CV Infográfico">
                     <span>CV Infográfico</span>
                 </a>
             </li>
             <li>
-                <a href="https://danifreflow.github.io/video-cv/" title="VideoCurrículum">
+                <a href="/video-cv/" title="VideoCurrículum">
                     <span>VideoCurrículum</span>
                 </a>
             </li>
             <li>
-                <a href="https://danifreflow.github.io/posts/" title="Últimos Posts">
+                <a href="/posts/" title="Últimos Posts">
                     <span>Últimos Posts</span>
                 </a>
             </li>
@@ -283,7 +283,7 @@ Descargarse la imagen que se encuentra en /var/lib/vz/template/cache/ del ordena
     </main>
     
 <footer class="footer">
-        <span>&copy; 2025 <a href="https://danifreflow.github.io/danielfernandezcalvoCV.github.io/">Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</a></span> · 
+        <span>&copy; 2025 <a href="/">Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</a></span> · 
 
     <span>
         Powered by
