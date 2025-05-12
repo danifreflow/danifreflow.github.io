@@ -7,11 +7,11 @@
 <meta name="robots" content="index, follow">
 <title>Migracion de máquinas en Proxmox sin clusterizar | Daniel Fernández Calvo - sistemas infórmaticos y arquitectura</title>
 <meta name="keywords" content="">
-<meta name="description" content="Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores.
+<meta name="description" content="Proxmox es un sistema operativo diseñado para hostear máquinas virtuales y contenedores.
 Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para
-pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas
+pequeños CPDs y home-labs. En este artículo pasaré a explicar como se pueden migrar máquinas
 virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.
-Pasos a seguir para migrar maquinas en proxmox
+Pasos a seguir para migrar máquinas en proxmox
 Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es
 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150">
 <meta name="author" content="">
@@ -64,8 +64,8 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
 </noscript><meta property="og:url" content="/posts/proxmoxmigration/">
   <meta property="og:site_name" content="Daniel Fernández Calvo - sistemas infórmaticos y arquitectura">
   <meta property="og:title" content="Migracion de máquinas en Proxmox sin clusterizar">
-  <meta property="og:description" content="Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores. Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.
-Pasos a seguir para migrar maquinas en proxmox Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150">
+  <meta property="og:description" content="Proxmox es un sistema operativo diseñado para hostear máquinas virtuales y contenedores. Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para pequeños CPDs y home-labs. En este artículo pasaré a explicar como se pueden migrar máquinas virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.
+Pasos a seguir para migrar máquinas en proxmox Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150">
   <meta property="og:locale" content="en-us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -73,11 +73,11 @@ Pasos a seguir para migrar maquinas en proxmox Vamos a suponer que tenemos dos o
     <meta property="article:modified_time" content="2025-05-08T16:42:18+02:00">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Migracion de máquinas en Proxmox sin clusterizar">
-<meta name="twitter:description" content="Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores.
+<meta name="twitter:description" content="Proxmox es un sistema operativo diseñado para hostear máquinas virtuales y contenedores.
 Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para
-pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas
+pequeños CPDs y home-labs. En este artículo pasaré a explicar como se pueden migrar máquinas
 virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.
-Pasos a seguir para migrar maquinas en proxmox
+Pasos a seguir para migrar máquinas en proxmox
 Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es
 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150">
 
@@ -108,12 +108,12 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
   "@type": "BlogPosting",
   "headline": "Migracion de máquinas en Proxmox sin clusterizar",
   "name": "Migracion de máquinas en Proxmox sin clusterizar",
-  "description": "Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores. Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.\nPasos a seguir para migrar maquinas en proxmox Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150\n",
+  "description": "Proxmox es un sistema operativo diseñado para hostear máquinas virtuales y contenedores. Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para pequeños CPDs y home-labs. En este artículo pasaré a explicar como se pueden migrar máquinas virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.\nPasos a seguir para migrar máquinas en proxmox Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150\n",
   "keywords": [
     
   ],
-  "articleBody": "Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores. Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.\nPasos a seguir para migrar maquinas en proxmox Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150\nEl primer ordenador tiene dos maquinas virtuales activas, mientras que el segundo no tiene ninguna la idea es que al final, el segundo ordenador tenga las dos maquinas virtuales corriendo y el segundo este libre.\nlistar las maquinas virtuales Utilizaremos el comando qm list, para ver las máqunas virtuales que tenemos funcionando, y nos fijaremos en que el estado este en stopped\nroot@qubata:~# qm list VMID NAME STATUS MEM(MB) BOOTDISK(GB) PID 100 Daniel-ptp stopped 2048 32.00 0 101 juanjo-IDQ-QNET-CS stopped 4096 20.00 0 En casp de que sean contenedores:\nroot@quasar:~# pct list VMID Status Lock Name 101 stopped Daniel-llavesNist 103 stopped Daniel-llavesNIstCV En caso de que una máquina no este stopped, hay que utilizar el siguiente comando\nqm stop siendo VMID el numero asociado a la máquina virtual.\nEn caso de que sean contenedores:\npct stop Crear un backup de la máquina virtual Una vez paradas las maquinas virtuales o los contenedores hay que hacer un backup de las imagenes, esto se hace con el comando\nvzdump --compress zstd --dumpdir /var/lib/vz/dump el modo de compresion debe ser zstd y el directorio puede ser cualquiera, pero el directorio donde proxmox guarda las imagenes es /var/lib/vz. Este proceso se tiene que hacer con todas las maquinas virtuales que se quieran migrar.\nEn caso de que sean contenedores:\nvzdump --dumpdir /var/lib/vz/dump Transferir las maquinas virtuales Para transferir las máquinas virtuales, se realizara un scp a la maquina a la que se quieran enviar, en este caso la 192.168.0.150\nscp -r /var/lib/vz/* root@192.168.0.150:/var/lib/vz/ Restaurar las maquina virtuales Desde la maquina en la que se quieren volver a levantar, hay que correr el siguiente comando con todas las máquinas que se quieren volver a levantar\nqmrestore /var/lib/vz/dump/.vma.zst --storage local-lvm recuerda que los VMID no se pueden repetir\nEn caso de que sean contenedores, es importante que se guarde en local-lvm\npct restore 106 /var/lib/vz/dump/vzdump-lxc-101-2025_04_23-15_05_22.tar --storage local-lvm Fallos comunes No enciende la maquina, por que el bridge es diferente en la máquina destino Solución: Editar la conexion de red en el frontend de proxmox en el apartado hardware.\nNo funciona el contenedor por no tener la imagen en el local Descargarse la imagen que se encuentra en /var/lib/vz/template/cache/ del ordenador con el contenedor\npveam download local debian-12-standard_12.7-1_amd64.tar.zst ",
-  "wordCount" : "464",
+  "articleBody": "Proxmox es un sistema operativo diseñado para hostear máquinas virtuales y contenedores. Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para pequeños CPDs y home-labs. En este artículo pasaré a explicar como se pueden migrar máquinas virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.\nPasos a seguir para migrar máquinas en proxmox Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es 192.168.0.2 y la ip del segundo ordenador es 192.168.0.150\nEl primer ordenador tiene dos máquinas virtuales activas, mientras que el segundo no tiene ninguna la idea es que al final, el segundo ordenador tenga las dos máquinas virtuales corriendo y el segundo este libre.\nlistar las máquinas virtuales Utilizaremos el comando qm list, para ver las máqunas virtuales que tenemos funcionando, y nos fijaremos en que el estado este en stopped\nroot@qubata:~# qm list VMID NAME STATUS MEM(MB) BOOTDISK(GB) PID 100 Daniel-ptp stopped 2048 32.00 0 101 juanjo-IDQ-QNET-CS stopped 4096 20.00 0 En casp de que sean contenedores:\nroot@quasar:~# pct list VMID Status Lock Name 101 stopped Daniel-llavesNist 103 stopped Daniel-llavesNIstCV En caso de que una máquina no este stopped, hay que utilizar el siguiente comando\nqm stop siendo VMID el número asociado a la máquina virtual.\nEn caso de que sean contenedores:\npct stop Crear un backup de la máquina virtual Una vez paradas las máquinas virtuales o los contenedores hay que hacer un backup de las imagenes, esto se hace con el comando\nvzdump --compress zstd --dumpdir /var/lib/vz/dump el modo de compresion debe ser zstd y el directorio puede ser cualquiera, pero el directorio donde proxmox guarda las imagenes es /var/lib/vz. Este proceso se tiene que hacer con todas las máquinas virtuales que se quieran migrar.\nEn caso de que sean contenedores:\nvzdump --dumpdir /var/lib/vz/dump Transferir las máquinas virtuales Para transferir las máquinas virtuales, se realizará un scp a la máquina a la que se quieran enviar, en este caso la 192.168.0.150\nscp -r /var/lib/vz/* root@192.168.0.150:/var/lib/vz/ Restaurar las máquina virtuales Desde la máquina en la que se quieren volver a levantar, hay que correr el siguiente comando con todas las máquinas que se quieren volver a levantar\nqmrestore /var/lib/vz/dump/.vma.zst --storage local-lvm recuerda que los VMID no se pueden repetir\nEn caso de que sean contenedores, es importante que se guarde en local-lvm\npct restore 106 /var/lib/vz/dump/vzdump-lxc-101-2025_04_23-15_05_22.tar --storage local-lvm Fallos comunes No enciende la máquina, porque el bridge es diferente en la máquina destino Solución: Editar la conexion de red en el frontend de proxmox en el apartado hardware.\nNo funciona el contenedor por no tener la imagen en el local Descargarse la imagen que se encuentra en /var/lib/vz/template/cache/ del ordenador con el contenedor\npveam download local debian-12-standard_12.7-1_amd64.tar.zst ",
+  "wordCount" : "463",
   "inLanguage": "en",
   "datePublished": "2025-05-08T16:42:18+02:00",
   "dateModified": "2025-05-08T16:42:18+02:00",
@@ -213,17 +213,17 @@ Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer 
 
 </div>
   </header> 
-  <div class="post-content"><p>Proxmox es un sistema operativo diseñado para hostear maquinas virtuales y contenedores.
+  <div class="post-content"><p>Proxmox es un sistema operativo diseñado para hostear máquinas virtuales y contenedores.
 Esta solución esta siendo muy apoyada por la comunidad y suele ser la distro de preferencia para
-pequeños CPDs y home-labs. En este artículo pasare a explicar como se pueden migrar máquinas
+pequeños CPDs y home-labs. En este artículo pasaré a explicar como se pueden migrar máquinas
 virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.</p>
-<h2 id="pasos-a-seguir-para-migrar-maquinas-en-proxmox">Pasos a seguir para migrar maquinas en proxmox<a hidden class="anchor" aria-hidden="true" href="#pasos-a-seguir-para-migrar-maquinas-en-proxmox">#</a></h2>
+<h2 id="pasos-a-seguir-para-migrar-máquinas-en-proxmox">Pasos a seguir para migrar máquinas en proxmox<a hidden class="anchor" aria-hidden="true" href="#pasos-a-seguir-para-migrar-máquinas-en-proxmox">#</a></h2>
 <p>Vamos a suponer que tenemos dos ordenadores corriendo proxmox, la ip del primer ordenador es
 <strong>192.168.0.2</strong> y la ip del segundo ordenador es <strong>192.168.0.150</strong></p>
-<p>El primer ordenador tiene dos maquinas virtuales activas, mientras que el segundo no tiene ninguna
-la idea es que al final, el segundo ordenador tenga las dos maquinas virtuales corriendo y el segundo
+<p>El primer ordenador tiene dos máquinas virtuales activas, mientras que el segundo no tiene ninguna
+la idea es que al final, el segundo ordenador tenga las dos máquinas virtuales corriendo y el segundo
 este libre.</p>
-<h2 id="listar-las-maquinas-virtuales">listar las maquinas virtuales<a hidden class="anchor" aria-hidden="true" href="#listar-las-maquinas-virtuales">#</a></h2>
+<h2 id="listar-las-máquinas-virtuales">listar las máquinas virtuales<a hidden class="anchor" aria-hidden="true" href="#listar-las-máquinas-virtuales">#</a></h2>
 <p>Utilizaremos el comando qm list, para ver las máqunas virtuales que tenemos funcionando,
 y nos fijaremos en que el estado este en stopped</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>root@qubata:~# qm list
@@ -237,23 +237,23 @@ y nos fijaremos en que el estado este en stopped</p>
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">103</span>        stopped                 Daniel-llavesNIstCV
 </span></span></code></pre></div><p>En caso de que una máquina no este stopped, hay que utilizar el siguiente comando</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qm stop &lt;VMID&gt;
-</span></span></code></pre></div><p>siendo VMID el numero asociado a la máquina virtual.</p>
+</span></span></code></pre></div><p>siendo VMID el número asociado a la máquina virtual.</p>
 <p>En caso de que sean contenedores:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pct stop &lt;VMID&gt;
 </span></span></code></pre></div><h2 id="crear-un-backup-de-la-máquina-virtual">Crear un backup de la máquina virtual<a hidden class="anchor" aria-hidden="true" href="#crear-un-backup-de-la-máquina-virtual">#</a></h2>
-<p>Una vez paradas las maquinas virtuales o los contenedores hay que hacer un backup de las imagenes, esto se hace con
+<p>Una vez paradas las máquinas virtuales o los contenedores hay que hacer un backup de las imagenes, esto se hace con
 el comando</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vzdump &lt;VMID&gt; --compress zstd --dumpdir /var/lib/vz/dump
 </span></span></code></pre></div><p>el modo de compresion debe ser zstd y el directorio puede ser cualquiera, pero el directorio donde
-proxmox guarda las imagenes es /var/lib/vz. Este proceso se  tiene que hacer con todas las maquinas
+proxmox guarda las imagenes es /var/lib/vz. Este proceso se  tiene que hacer con todas las máquinas
 virtuales que se quieran migrar.</p>
 <p>En caso de que sean contenedores:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vzdump &lt;VMID&gt; --dumpdir /var/lib/vz/dump
-</span></span></code></pre></div><h2 id="transferir-las-maquinas-virtuales">Transferir las maquinas virtuales<a hidden class="anchor" aria-hidden="true" href="#transferir-las-maquinas-virtuales">#</a></h2>
-<p>Para transferir las máquinas virtuales, se realizara un scp a la maquina a la que se quieran enviar, en este caso la 192.168.0.150</p>
+</span></span></code></pre></div><h2 id="transferir-las-máquinas-virtuales">Transferir las máquinas virtuales<a hidden class="anchor" aria-hidden="true" href="#transferir-las-máquinas-virtuales">#</a></h2>
+<p>Para transferir las máquinas virtuales, se realizará un scp a la máquina a la que se quieran enviar, en este caso la 192.168.0.150</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>scp -r /var/lib/vz/* root@192.168.0.150:/var/lib/vz/
-</span></span></code></pre></div><h2 id="restaurar-las-maquina-virtuales">Restaurar las maquina virtuales<a hidden class="anchor" aria-hidden="true" href="#restaurar-las-maquina-virtuales">#</a></h2>
-<p>Desde la maquina en la que se quieren volver a levantar, hay que correr el siguiente comando con
+</span></span></code></pre></div><h2 id="restaurar-las-máquina-virtuales">Restaurar las máquina virtuales<a hidden class="anchor" aria-hidden="true" href="#restaurar-las-máquina-virtuales">#</a></h2>
+<p>Desde la máquina en la que se quieren volver a levantar, hay que correr el siguiente comando con
 todas las máquinas que se quieren volver a levantar</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>qmrestore /var/lib/vz/dump/&lt;ARCHIVO-A-TRANSFERIR&gt;.vma.zst &lt;VMID&gt; --storage local-lvm
 </span></span></code></pre></div><p>recuerda que los VMID <strong>no se pueden repetir</strong></p>
@@ -262,7 +262,7 @@ todas las máquinas que se quieren volver a levantar</p>
 </span></span></code></pre></div><h2 id="fallos-comunes">Fallos comunes<a hidden class="anchor" aria-hidden="true" href="#fallos-comunes">#</a></h2>
 <ul>
 <li>
-<p>No enciende la maquina, por que el bridge es diferente en la máquina destino
+<p>No enciende la máquina, porque el bridge es diferente en la máquina destino
 Solución: Editar la conexion de red en el frontend de proxmox en el apartado hardware.</p>
 </li>
 <li>
