@@ -120,8 +120,11 @@ virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.&lt
 &lt;/style&gt;
 &lt;div style=&#34;display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;&#34;&gt;
   &lt;img src=&#34;/images/tecnologias.png&#34; alt=&#34;Tecnologías&#34; style=&#34;width: 30%; max-width: 300px; height: auto;&#34; /&gt;
-  &lt;img src=&#34;/images/infograma.png&#34; alt=&#34;Infograma&#34; style=&#34;width: 30%; max-width: 300px; height: auto;&#34; /&gt;
   &lt;img src=&#34;/images/idiomas.png&#34; alt=&#34;Idiomas&#34; style=&#34;width: 30%; max-width: 300px; height: auto;&#34; /&gt;
+&lt;/div&gt;
+&lt;div style=&#34;display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;&#34;&gt;
+    &lt;img src=&#34;/images/hsociales.png&#34; alt=&#34;Infograma&#34; style=&#34;width: 30%; max-width: 300px; height: auto;&#34; /&gt;
+    &lt;img src=&#34;/images/infograma.png&#34; alt=&#34;Infograma&#34; style=&#34;width: 30%; max-width: 300px; height: auto;&#34; /&gt;
 &lt;/div&gt;
 &lt;!-- LEYENDA --&gt;
 &lt;div class=&#34;legend&#34;&gt;
