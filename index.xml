@@ -206,7 +206,21 @@ virtuales de una instalación de proxmox a otra sin necesidad de clusterizar.&lt
       <link>/video-cv/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>/video-cv/</guid>
-      <description>&lt;p&gt;Aquí puedes incrustar un video de YouTube, Vimeo, o local.&lt;/p&gt;</description>
+      <description>&lt;video width=&#34;640&#34; height=&#34;360&#34; controls&gt;
+  &lt;source src=&#34;/video/dani.mp4&#34; type=&#34;video/mp4&#34;&gt;
+  Tu navegador no soporta el tag de video.
+&lt;/video&gt;
+  &lt;div style=&#34;margin-top: 1rem; display: flex; gap: 0.5rem;&#34;&gt;
+    &lt;a href=&#34;mailto:d.fernandez@cirqlr.es&#34;&gt;
+      &lt;img src=&#34;/images/email.jpg&#34; alt=&#34;Email&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
+    &lt;/a&gt;
+    &lt;a href=&#34;https://github.com/danifreflow&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;/images/GitHub-Mark-ea2971cee799.png&#34; alt=&#34;GitHub&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
+    &lt;/a&gt;
+    &lt;a href=&#34;https://www.linkedin.com/in/daniel-fernández-43775723b&#34; target=&#34;_blank&#34;&gt;
+      &lt;img src=&#34;/images/linkedIn.jpg&#34; alt=&#34;LinkedIn&#34; style=&#34;width: 32px; height: 32px;&#34;&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;</description>
     </item>
   </channel>
 </rss>
