@@ -86,7 +86,9 @@ const cornerLabel = computed(() => (props.card.suit === 'joker' ? '★' : rankLa
   font-size: var(--fs-caption);
   letter-spacing: var(--tracking-caption);
   text-transform: uppercase;
-  color: var(--fg-muted);
+  /* Fijo (no usa var(--fg-muted)): la cara de la carta es siempre blanca,
+     tanto en modo claro como oscuro, así que su texto no debe cambiar con el tema. */
+  color: #4b5563;
 }
 
 .playing-card--oros {

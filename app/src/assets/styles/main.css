@@ -1,3 +1,64 @@
+:root {
+  color-scheme: light;
+
+  /* Tokens propios de esta app (no forman parte de estilo.css compartido). */
+  --surface: var(--base-white);
+  --tone-good-bg: #eaf6ec;
+  --tone-good-border: #bfe3c4;
+  --tone-bad-bg: #fbeaea;
+  --tone-bad-border: #f0c4c4;
+}
+
+/* Modo oscuro: sigue la preferencia del sistema salvo que el usuario elija
+   explícitamente un tema con el botón (atributo data-theme en <html>). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --bg: #1c1a18;
+    --bg-soft: #221f1c;
+    --bg-warm: #332f29;
+
+    --fg: #d8d3cc;
+    --fg-strong: #f5f1ea;
+    --fg-muted: #a9a29a;
+
+    --border: #3a3631;
+    --border-strong: #4a4038;
+
+    --accent-soft: #4a3620;
+
+    --surface: #2a2723;
+    --tone-good-bg: #1e3a24;
+    --tone-good-border: #2f5c3a;
+    --tone-bad-bg: #3a1f1f;
+    --tone-bad-border: #5c2f2f;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #1c1a18;
+  --bg-soft: #221f1c;
+  --bg-warm: #332f29;
+
+  --fg: #d8d3cc;
+  --fg-strong: #f5f1ea;
+  --fg-muted: #a9a29a;
+
+  --border: #3a3631;
+  --border-strong: #4a4038;
+
+  --accent-soft: #4a3620;
+
+  --surface: #2a2723;
+  --tone-good-bg: #1e3a24;
+  --tone-good-border: #2f5c3a;
+  --tone-bad-bg: #3a1f1f;
+  --tone-bad-border: #5c2f2f;
+}
+
 *,
 *::before,
 *::after {
@@ -6,6 +67,8 @@
 
 body {
   margin: 0;
+  background: var(--bg);
+  transition: background var(--dur-base) var(--ease-standard);
 }
 
 button,

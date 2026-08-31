@@ -127,12 +127,12 @@ const message = computed(() => {
 }
 
 .result-banner--good {
-  background: #eaf6ec;
-  border-color: #bfe3c4;
+  background: var(--tone-good-bg);
+  border-color: var(--tone-good-border);
 }
 .result-banner--bad {
-  background: #fbeaea;
-  border-color: #f0c4c4;
+  background: var(--tone-bad-bg);
+  border-color: var(--tone-bad-border);
 }
 .result-banner--neutral {
   background: var(--bg-soft);

@@ -50,7 +50,7 @@ const entries = computed(() => Object.entries(props.drinks).sort((a, b) => b[1] 
   justify-content: space-between;
   padding: var(--sp-2) var(--sp-3);
   border-radius: var(--r-sm);
-  background: var(--base-white);
+  background: var(--surface);
   color: var(--fg);
 }
 

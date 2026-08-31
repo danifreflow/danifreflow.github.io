@@ -1,5 +1,6 @@
 <template>
   <main class="app-shell">
+    <ThemeToggle />
     <PlayerSetup v-if="!state" :loading="loading" :error="error" @start="handleStart" />
     <GameBoard v-else :state="state" :loading="loading" :error="error" @guess="handleGuess" @restart="resetGame" />
     <FullNelsonPlayer v-if="state && state.mode === 'full_nelson'" :key="state.id" />
@@ -10,6 +11,7 @@
 import FullNelsonPlayer from '@/components/FullNelsonPlayer.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import PlayerSetup from '@/components/PlayerSetup.vue'
+import ThemeToggle from '@/components/ThemeToggle.vue'
 import { useGame } from '@/composables/useGame'
 import type { GameMode, GuessDirection } from '@/types/game'
 

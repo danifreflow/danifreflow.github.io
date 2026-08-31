@@ -219,6 +219,7 @@ function handleSubmit(): void {
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--r-md);
   border: 1px solid var(--border);
+  background: var(--surface);
   font-size: var(--fs-body);
   color: var(--fg-strong);
 }
