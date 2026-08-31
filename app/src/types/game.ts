@@ -1,0 +1,46 @@
+export type GuessDirection = 'mayor' | 'menor'
+
+export type Outcome = 'inicio' | 'acierto' | 'sacada' | 'fallo' | 'humillacion' | 'empate'
+
+export type Suit = 'oros' | 'copas' | 'espadas' | 'bastos'
+
+export interface Card {
+  suit: Suit
+  number: number
+  label: string
+  code: string
+}
+
+export interface GameEvent {
+  code: string
+  title: string
+  message: string
+  drinks: number
+}
+
+export interface RoundResult {
+  round_number: number
+  player: string | null
+  guess: GuessDirection | null
+  previous_card: Card | null
+  card: Card
+  correct: boolean | null
+  diff: number | null
+  outcome: Outcome
+  drinks_applied: number
+  drinks_delta: Record<string, number>
+  events: GameEvent[]
+}
+
+export interface GameState {
+  id: string
+  players: string[]
+  current_player: string | null
+  top_card: Card
+  cards_remaining: number
+  total_cards: number
+  finished: boolean
+  drinks: Record<string, number>
+  last_round: RoundResult
+  history: RoundResult[]
+}

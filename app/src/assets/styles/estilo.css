@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Baobab AI — Colors & Type
+   --------------------------------------------------------------------------
+   Primary brand: warm orange (#ffb458) + slate gray-blue (#666666)
+   Complementary: beige tones for warmth, neutrals for surfaces
+   Type: Bebas Neue for headlines, Montserrat for body
+   ========================================================================== */
+
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
+   :root {
+     /* -------------------------------- BRAND -------------------------------- */
+     --brand-orange:        #ffb458;   /* primary accent — buttons, lines, highlights */
+     --brand-orange-deep:   #c96b00;   /* deep orange used in gradient stops */
+     --brand-orange-warm:   #f39e3e;
+     --brand-orange-soft:   #ffd9a8;   /* tinted backgrounds */
+   
+     --brand-blue:          #666666;   /* primary "blue" (warm gray) — titles, body */
+     --brand-blue-strong:   #4a4a4a;
+     --brand-blue-soft:     #8a8a8a;
+   
+     --brand-beige:         #d3cdc6;   /* warm taupe, decorative blocks */
+     --brand-beige-light:   #f4f2f0;   /* soft surface tone */
+     --brand-beige-deep:    #9f897d;   /* darker accent / secondary */
+   
+     /* -------------------------------- BASE --------------------------------- */
+     --base-white:          #ffffff;
+     --base-black:          #000000;
+     --base-gray-text:      #4b5563;
+     --base-gray-line:      #e5e1dc;
+     --base-gray-bg:        #fafaf9;
+   
+     /* ------------------------------ SEMANTIC ------------------------------- */
+     --bg:                  var(--base-white);
+     --bg-soft:             var(--brand-beige-light);
+     --bg-warm:             var(--brand-beige);
+     --bg-inverse:          var(--base-black);
+   
+     --fg:                  var(--brand-blue);
+     --fg-strong:           var(--brand-blue-strong);
+     --fg-muted:            var(--base-gray-text);
+     --fg-inverse:          var(--base-white);
+   
+     --accent:              var(--brand-orange);
+     --accent-deep:         var(--brand-orange-deep);
+     --accent-soft:         var(--brand-orange-soft);
+   
+     --border:              var(--base-gray-line);
+     --border-strong:       var(--brand-beige);
+   
+     /* ------------------------------- TYPE ---------------------------------- */
+     --font-display:        'Oswald', 'Impact', sans-serif;
+     --font-sans:           'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+     --font-mono:           'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+   
+     /* Display sizes (Bebas Neue — lean condensed; sizes feel large) */
+     --fs-display-xl:       96px;
+     --fs-display-lg:       72px;
+     --fs-display:          56px;
+     --fs-h1:               44px;
+     --fs-h2:               32px;
+     --fs-h3:               24px;
+     --fs-h4:               18px;
+   
+     /* Body (Montserrat) */
+     --fs-body-xl:          20px;
+     --fs-body-lg:          18px;
+     --fs-body:             16px;
+     --fs-body-sm:          14px;
+     --fs-caption:          12px;
+   
+     --lh-tight:            1.05;
+     --lh-snug:             1.2;
+     --lh-normal:           1.5;
+     --lh-loose:            1.7;
+   
+     --tracking-display:    0.02em;   /* Bebas Neue benefits from a touch of tracking */
+     --tracking-display-lg: 0.04em;   /* big headlines feel grand with extra tracking */
+     --tracking-body:       0;
+     --tracking-caption:    0.06em;   /* small caps / eyebrows */
+   
+     /* ----------------------------- SPACING --------------------------------- */
+     --sp-1:   4px;
+     --sp-2:   8px;
+     --sp-3:   12px;
+     --sp-4:   16px;
+     --sp-5:   24px;
+     --sp-6:   32px;
+     --sp-7:   48px;
+     --sp-8:   64px;
+     --sp-9:   96px;
+     --sp-10: 128px;
+   
+     /* ------------------------------ RADII ---------------------------------- */
+     --r-xs:   4px;
+     --r-sm:   8px;
+     --r-md:   12px;   /* default — "ligeramente redondeados" */
+     --r-lg:   18px;
+     --r-xl:   28px;
+     --r-pill: 999px;
+   
+     /* ----------------------------- SHADOWS --------------------------------- */
+     --shadow-xs: 0 1px 2px rgba(75, 60, 50, 0.06);
+     --shadow-sm: 0 2px 6px rgba(75, 60, 50, 0.08);
+     --shadow-md: 0 8px 20px rgba(75, 60, 50, 0.10);
+     --shadow-lg: 0 18px 40px rgba(75, 60, 50, 0.14);
+     --shadow-warm: 0 12px 32px rgba(255, 180, 88, 0.28);   /* orange glow for CTAs */
+   
+     /* ------------------------------ MOTION --------------------------------- */
+     --ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+     --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+     --dur-fast:      120ms;
+     --dur-base:      220ms;
+     --dur-slow:      420ms;
+   }
+   
+   /* ============================== ELEMENTS ================================= */
+   
+   html, body {
+     font-family: var(--font-sans);
+     font-size:   var(--fs-body);
+     line-height: var(--lh-normal);
+     color:       var(--fg);
+     background:  var(--bg);
+     -webkit-font-smoothing: antialiased;
+     text-rendering: optimizeLegibility;
+   }
+   
+   h1, .h1, h2, .h2, h3, .h3, h4, .h4, .display {
+     font-family: var(--font-display);
+     font-weight: 400;
+     color: var(--fg-strong);
+     letter-spacing: var(--tracking-display);
+     line-height: var(--lh-tight);
+     margin: 0;
+     text-transform: uppercase;
+   }
+   
+   .display    { font-size: var(--fs-display);    letter-spacing: var(--tracking-display-lg); }
+   .display-lg { font-size: var(--fs-display-lg); letter-spacing: var(--tracking-display-lg); }
+   .display-xl { font-size: var(--fs-display-xl); letter-spacing: var(--tracking-display-lg); }
+   
+   h1, .h1 { font-size: var(--fs-h1); }
+   h2, .h2 { font-size: var(--fs-h2); }
+   h3, .h3 { font-size: var(--fs-h3); }
+   h4, .h4 { font-size: var(--fs-h4); letter-spacing: var(--tracking-caption); }
+   
+   p, .body {
+     font-family: var(--font-sans);
+     font-size:   var(--fs-body);
+     line-height: var(--lh-normal);
+     color:       var(--fg-muted);
+     margin: 0;
+   }
+   
+   .body-lg  { font-size: var(--fs-body-lg);  line-height: var(--lh-normal); }
+   .body-sm  { font-size: var(--fs-body-sm);  line-height: var(--lh-normal); }
+   .caption  { font-size: var(--fs-caption); letter-spacing: var(--tracking-caption); text-transform: uppercase; font-weight: 500; color: var(--fg); }
+   
+   a {
+     color: var(--fg-strong);
+     text-decoration: none;
+     border-bottom: 1px solid var(--accent);
+     transition: color var(--dur-fast) var(--ease-standard), border-color var(--dur-fast) var(--ease-standard);
+   }
+   a:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
+   
+   code, pre, .mono { font-family: var(--font-mono); font-size: 0.92em; }
+   
+   ::selection { background: var(--accent-soft); color: var(--fg-strong); }
+   
