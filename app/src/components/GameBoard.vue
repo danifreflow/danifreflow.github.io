@@ -15,6 +15,7 @@
 
     <div v-if="!state.finished" class="game-board__actions">
       <button class="btn btn--menor" :disabled="loading" @click="emit('guess', 'menor')">Menor</button>
+      <button class="btn btn--igual" :disabled="loading" @click="emit('guess', 'igual')">Igual</button>
       <button class="btn btn--mayor" :disabled="loading" @click="emit('guess', 'mayor')">Mayor</button>
     </div>
     <div v-else class="game-board__finished">
@@ -81,6 +82,12 @@ const emit = defineEmits<{
 
 .btn--menor {
   background: var(--brand-blue-strong);
+  color: var(--fg-inverse);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--igual {
+  background: var(--brand-beige-deep);
   color: var(--fg-inverse);
   box-shadow: var(--shadow-md);
 }

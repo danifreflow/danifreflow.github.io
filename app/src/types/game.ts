@@ -1,6 +1,14 @@
-export type GuessDirection = 'mayor' | 'menor'
+export type GuessDirection = 'mayor' | 'menor' | 'igual'
 
-export type Outcome = 'inicio' | 'acierto' | 'sacada' | 'fallo' | 'humillacion' | 'empate'
+export type Outcome =
+  | 'inicio'
+  | 'acierto'
+  | 'sacada'
+  | 'fallo'
+  | 'humillacion'
+  | 'empate'
+  | 'igual_acierto'
+  | 'igual_fallo'
 
 export type Suit = 'oros' | 'copas' | 'espadas' | 'bastos'
 

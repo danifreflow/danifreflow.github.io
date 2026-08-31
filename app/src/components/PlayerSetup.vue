@@ -41,14 +41,20 @@
       <h2 class="h3">Cómo se juega</h2>
       <ul class="body-sm">
         <li>Se reparten las 40 cartas de la baraja, una a una, sin repetirse.</li>
-        <li>En cada turno apuestas si la siguiente carta será mayor o menor que la de encima.</li>
-        <li>Aciertas: te salvas. Fallas: bebes 1 trago.</li>
+        <li>
+          En cada turno apuestas si la siguiente carta será mayor, menor o igual que la de
+          encima. Aciertas: te salvas. Fallas: bebes 1 trago.
+        </li>
         <li>
           Si la diferencia es de un solo número (por ejemplo hay un 6 y sale un 7): aciertas y es
           una <strong>sacada</strong> (no bebes, pero reparte un trago a cada uno de los demás);
           fallas y es una <strong>humillación</strong> (bebes 3 tragos).
         </li>
-        <li>Empate a número (mismo valor, distinto palo): se beben siempre 2 tragos.</li>
+        <li>Empate a número apostando mayor/menor: se beben siempre 2 tragos.</li>
+        <li>
+          Apuesta <strong>igual</strong>: si la carta repite número, no bebes y repartes 4
+          tragos a cada uno de los demás; si fallas, bebes 2 tragos.
+        </li>
         <li>
           Los 4 ases (bastada, copazo, sablada, lingotazo) son cartas especiales: pase lo que
           pase con tu apuesta, se bebe siempre 1 trago y no se suma nada más.

@@ -28,6 +28,8 @@ const OUTCOME_TITLES: Record<Outcome, string> = {
   fallo: 'Fallo',
   humillacion: '¡Humillación!',
   empate: 'Empate',
+  igual_acierto: '¡Acierto!',
+  igual_fallo: 'Fallo',
 }
 
 const OUTCOME_TONES: Record<Outcome, Tone> = {
@@ -37,6 +39,8 @@ const OUTCOME_TONES: Record<Outcome, Tone> = {
   fallo: 'bad',
   humillacion: 'bad',
   empate: 'bad',
+  igual_acierto: 'good',
+  igual_fallo: 'bad',
 }
 
 const visible = computed(() => props.round.outcome !== 'inicio' || props.round.events.length > 0)
@@ -52,14 +56,23 @@ const message = computed(() => {
   }
 
   const who = round.player ? `${round.player} apostó` : 'Se apostó'
-  const guessLabel = round.guess === 'mayor' ? 'MAYOR' : 'menor'
+  const guessLabel = round.guess === 'mayor' ? 'MAYOR' : round.guess === 'menor' ? 'menor' : 'IGUAL'
   const previousLabel = round.previous_card?.label ?? ''
-  const recipients = Object.entries(round.drinks_delta)
-  const drinksLabel = recipients.length
-    ? recipients
-        .map(([name, amount]) => `${name} bebe ${amount} ${amount === 1 ? 'trago' : 'tragos'}`)
-        .join(', ') + '.'
-    : 'Nadie bebe.'
+
+  let drinksLabel: string
+  if (round.outcome === 'sacada' || round.outcome === 'igual_acierto') {
+    drinksLabel =
+      round.drinks_applied > 0
+        ? `${round.player ?? 'El jugador'} reparte ${round.drinks_applied} ${round.drinks_applied === 1 ? 'trago' : 'tragos'}.`
+        : 'Nadie bebe: no hay más jugadores a quien repartir.'
+  } else {
+    const recipients = Object.entries(round.drinks_delta)
+    drinksLabel = recipients.length
+      ? recipients
+          .map(([name, amount]) => `${name} bebe ${amount} ${amount === 1 ? 'trago' : 'tragos'}`)
+          .join(', ') + '.'
+      : 'Nadie bebe.'
+  }
 
   return `${who} a ${guessLabel} sobre ${previousLabel}. Sale ${round.card.label}. ${drinksLabel}`
 })

@@ -6,12 +6,15 @@
  * (GitHub Pages). Las reglas son idénticas:
  *
  * - 40 cartas (4 palos x 10 valores: 1-7, 10-12), se reparten todas sin repetirse.
- * - En cada ronda se apuesta si la siguiente carta será mayor o menor que la
- *   carta superior actual. Acertar salva, fallar bebe 1 trago.
+ * - En cada ronda se apuesta si la siguiente carta será mayor, menor o igual
+ *   que la carta superior actual. Acertar salva, fallar bebe 1 trago.
  * - Si la diferencia entre ambas cartas es de 1 (p.ej. sale un 7 con un 6
  *   encima): acertar es una "sacada" (no bebes, reparte 1 trago a cada uno de
  *   los demás jugadores); fallar es una "humillación" (bebes 3 tragos).
- * - Empate (mismo número, distinto palo): siempre se beben 2 tragos.
+ * - Empate (mismo número, distinto palo) apostando mayor/menor: siempre se
+ *   beben 2 tragos.
+ * - Apuesta "igual": si aciertas (la carta repite número), no bebes y
+ *   repartes 4 tragos a cada uno de los demás jugadores; si fallas, bebes 2.
  * - Cartas evento: los 4 ases (bastada, copazo, sablada, lingotazo) y el 3 de
  *   copas (tres copas) fijan sus propios tragos y anulan cualquier otro
  *   cálculo de la ronda.
@@ -75,6 +78,8 @@ const FALLO_DRINKS = 1
 const HUMILLACION_DRINKS = 3
 const EMPATE_DRINKS = 2
 const SACADA_DRINKS_PER_OTHER_PLAYER = 1
+const IGUAL_FALLO_DRINKS = 2
+const IGUAL_ACIERTO_DRINKS_PER_OTHER_PLAYER = 4
 const EVENT_DRINKS = 1
 
 type SimpleOutcome = 'acierto' | 'fallo' | 'humillacion' | 'empate'
@@ -100,31 +105,31 @@ const EVENT_CARDS: Record<string, EventDef> = {
   '1_bastos': {
     code: 'bastada',
     title: '¡Bastada!',
-    message: 'Ha salido el As de Bastos: bebe 1 trago, sin sumar nada más.',
+    message: '¡Una bastada!',
     drinks: EVENT_DRINKS,
   },
   '1_copas': {
     code: 'copazo',
     title: '¡Copazo!',
-    message: 'Ha salido el As de Copas: bebe 1 trago, sin sumar nada más.',
+    message: '¡Un copazo!',
     drinks: EVENT_DRINKS,
   },
   '1_espadas': {
     code: 'sablada',
     title: '¡Sablada!',
-    message: 'Ha salido el As de Espadas: bebe 1 trago, sin sumar nada más.',
+    message: '¡Pega una sablada a tu compañero!',
     drinks: EVENT_DRINKS,
   },
   '1_oros': {
     code: 'lingotazo',
     title: '¡Lingotazo!',
-    message: 'Ha salido el As de Oros: bebe 1 trago, sin sumar nada más.',
+    message: '¡Un lingotazo!',
     drinks: EVENT_DRINKS,
   },
   '3_copas': {
     code: 'tres_copas',
     title: '¡Tres copas!',
-    message: 'Ha salido el 3 de Copas: bebe 3 tragos, sin sumar nada más.',
+    message: '¡Tres de copas, tres copas!',
     drinks: 3,
   },
 }
@@ -208,7 +213,10 @@ export class Game {
     let outcome: Outcome
     let correct: boolean | null
 
-    if (card.number === previousCard.number) {
+    if (direction === 'igual') {
+      correct = card.number === previousCard.number
+      outcome = correct ? 'igual_acierto' : 'igual_fallo'
+    } else if (card.number === previousCard.number) {
       outcome = 'empate'
       correct = false
     } else {
@@ -242,6 +250,21 @@ export class Game {
             drinksDelta[other] = SACADA_DRINKS_PER_OTHER_PLAYER
           }
         }
+      }
+    } else if (outcome === 'igual_acierto') {
+      // Aciertas el "igual": no bebes, repartes 4 tragos a cada uno de los demás.
+      drinksApplied = IGUAL_ACIERTO_DRINKS_PER_OTHER_PLAYER * Math.max(this.players.length - 1, 0)
+      if (player !== null) {
+        for (const other of this.players) {
+          if (other !== player) {
+            drinksDelta[other] = IGUAL_ACIERTO_DRINKS_PER_OTHER_PLAYER
+          }
+        }
+      }
+    } else if (outcome === 'igual_fallo') {
+      drinksApplied = IGUAL_FALLO_DRINKS
+      if (player !== null) {
+        drinksDelta[player] = IGUAL_FALLO_DRINKS
       }
     } else {
       drinksApplied = BASE_DRINKS[outcome as SimpleOutcome]
