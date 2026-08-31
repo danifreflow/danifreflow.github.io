@@ -18,11 +18,16 @@
  * - Cartas evento: los 4 ases (bastada, copazo, sablada, lingotazo) y el 3 de
  *   copas (tres copas) fijan sus propios tragos y anulan cualquier otro
  *   cálculo de la ronda.
+ *
+ * Modo "Full Nelson": mismas reglas, pero todas las cantidades de tragos se
+ * multiplican x2, y la baraja incluye una carta comodín extra ("Popo-popo-per")
+ * que funciona como una carta evento más.
  */
 
 import type {
   Card,
   GameEvent,
+  GameMode,
   GameState,
   GuessDirection,
   Outcome,
@@ -33,11 +38,17 @@ import type {
 const SUITS: Suit[] = ['oros', 'copas', 'espadas', 'bastos']
 const NUMBERS: number[] = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12]
 
+// Hueco sin usar en la numeración real de la baraja (1-7, 10-12): perfecto
+// para que el comodín compare de forma natural sin colisionar con ninguna carta.
+const JOKER_NUMBER = 8
+const JOKER_LABEL = 'Popo-popo-per'
+
 const SUIT_LABELS: Record<Suit, string> = {
   oros: 'Oros',
   copas: 'Copas',
   espadas: 'Espadas',
   bastos: 'Bastos',
+  joker: JOKER_LABEL,
 }
 
 const NUMBER_LABELS: Record<number, string> = { 1: 'As', 10: 'Sota', 11: 'Caballo', 12: 'Rey' }
@@ -55,12 +66,24 @@ function makeCard(suit: Suit, number: number): Card {
   }
 }
 
-function buildDeck(): Card[] {
+function makeJokerCard(): Card {
+  return {
+    suit: 'joker',
+    number: JOKER_NUMBER,
+    label: JOKER_LABEL,
+    code: `${JOKER_NUMBER}_joker`,
+  }
+}
+
+function buildDeck(mode: GameMode): Card[] {
   const deck: Card[] = []
   for (const suit of SUITS) {
     for (const number of NUMBERS) {
       deck.push(makeCard(suit, number))
     }
+  }
+  if (mode === 'full_nelson') {
+    deck.push(makeJokerCard())
   }
   return deck
 }
@@ -74,6 +97,8 @@ function shuffle<T>(items: T[]): T[] {
   return shuffled
 }
 
+// Valores del modo normal. En modo "full_nelson" se multiplican x2 (ver
+// Game.drinkMultiplier), incluidos los tragos de las cartas evento.
 const FALLO_DRINKS = 1
 const HUMILLACION_DRINKS = 3
 const EMPATE_DRINKS = 2
@@ -81,6 +106,9 @@ const SACADA_DRINKS_PER_OTHER_PLAYER = 1
 const IGUAL_FALLO_DRINKS = 2
 const IGUAL_ACIERTO_DRINKS_PER_OTHER_PLAYER = 4
 const EVENT_DRINKS = 1
+const JOKER_DRINKS = 5
+
+const FULL_NELSON_MULTIPLIER = 2
 
 type SimpleOutcome = 'acierto' | 'fallo' | 'humillacion' | 'empate'
 
@@ -132,6 +160,12 @@ const EVENT_CARDS: Record<string, EventDef> = {
     message: '¡Tres de copas, tres copas!',
     drinks: 3,
   },
+  [`${JOKER_NUMBER}_joker`]: {
+    code: 'popo_popo_per',
+    title: '¡Popo-popo-per!',
+    message: '¡Popo-popo-per!',
+    drinks: JOKER_DRINKS,
+  },
 }
 
 function checkEvents(card: Card): GameEvent[] {
@@ -149,24 +183,28 @@ function createId(): string {
 export class GameError extends Error {}
 
 export class Game {
-  static readonly TOTAL_CARDS = 40
-
   readonly id: string
+  readonly mode: GameMode
   readonly players: string[]
   readonly drinks: Record<string, number>
+  readonly totalCards: number
   finished = false
   readonly history: RoundResult[] = []
   topCard: Card
 
+  private readonly drinkMultiplier: number
   private drawPile: Card[]
   private currentPlayerIndex = 0
 
-  constructor(players: string[] = []) {
+  constructor(players: string[] = [], mode: GameMode = 'normal') {
     this.id = createId()
+    this.mode = mode
+    this.drinkMultiplier = mode === 'full_nelson' ? FULL_NELSON_MULTIPLIER : 1
     this.players = [...players]
     this.drinks = Object.fromEntries(this.players.map((name) => [name, 0]))
 
-    this.drawPile = shuffle(buildDeck())
+    this.drawPile = shuffle(buildDeck(mode))
+    this.totalCards = this.drawPile.length
     const firstCard = this.drawPile.shift() as Card
     this.topCard = firstCard
 
@@ -237,37 +275,39 @@ export class Game {
     if (events.length > 0) {
       // Las cartas evento fijan sus propios tragos y anulan el resultado
       // de la apuesta de esta ronda (no se suma nada más).
-      drinksApplied = events.reduce((total, event) => total + event.drinks, 0)
+      drinksApplied = events.reduce((total, event) => total + event.drinks, 0) * this.drinkMultiplier
       if (player !== null && drinksApplied) {
         drinksDelta[player] = drinksApplied
       }
     } else if (outcome === 'sacada') {
-      // Reparte un trago a cada uno de los demás jugadores (0 si no hay otros).
-      drinksApplied = SACADA_DRINKS_PER_OTHER_PLAYER * Math.max(this.players.length - 1, 0)
+      // Reparte un trago (x2 en Full Nelson) a cada uno de los demás (0 si no hay otros).
+      const perPlayer = SACADA_DRINKS_PER_OTHER_PLAYER * this.drinkMultiplier
+      drinksApplied = perPlayer * Math.max(this.players.length - 1, 0)
       if (player !== null) {
         for (const other of this.players) {
           if (other !== player) {
-            drinksDelta[other] = SACADA_DRINKS_PER_OTHER_PLAYER
+            drinksDelta[other] = perPlayer
           }
         }
       }
     } else if (outcome === 'igual_acierto') {
-      // Aciertas el "igual": no bebes, repartes 4 tragos a cada uno de los demás.
-      drinksApplied = IGUAL_ACIERTO_DRINKS_PER_OTHER_PLAYER * Math.max(this.players.length - 1, 0)
+      // Aciertas el "igual": no bebes, repartes N tragos a cada uno de los demás.
+      const perPlayer = IGUAL_ACIERTO_DRINKS_PER_OTHER_PLAYER * this.drinkMultiplier
+      drinksApplied = perPlayer * Math.max(this.players.length - 1, 0)
       if (player !== null) {
         for (const other of this.players) {
           if (other !== player) {
-            drinksDelta[other] = IGUAL_ACIERTO_DRINKS_PER_OTHER_PLAYER
+            drinksDelta[other] = perPlayer
           }
         }
       }
     } else if (outcome === 'igual_fallo') {
-      drinksApplied = IGUAL_FALLO_DRINKS
+      drinksApplied = IGUAL_FALLO_DRINKS * this.drinkMultiplier
       if (player !== null) {
-        drinksDelta[player] = IGUAL_FALLO_DRINKS
+        drinksDelta[player] = drinksApplied
       }
     } else {
-      drinksApplied = BASE_DRINKS[outcome as SimpleOutcome]
+      drinksApplied = BASE_DRINKS[outcome as SimpleOutcome] * this.drinkMultiplier
       if (player !== null && drinksApplied) {
         drinksDelta[player] = drinksApplied
       }
@@ -308,11 +348,12 @@ export class Game {
   toState(): GameState {
     return {
       id: this.id,
+      mode: this.mode,
       players: this.players,
       current_player: this.currentPlayer,
       top_card: this.topCard,
       cards_remaining: this.cardsRemaining,
-      total_cards: Game.TOTAL_CARDS,
+      total_cards: this.totalCards,
       finished: this.finished,
       drinks: { ...this.drinks },
       last_round: this.lastRound,

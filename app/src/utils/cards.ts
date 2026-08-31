@@ -11,6 +11,7 @@ export const SUIT_LABELS: Record<Suit, string> = {
   copas: 'Copas',
   espadas: 'Espadas',
   bastos: 'Bastos',
+  joker: 'Popo-popo-per',
 }
 
 export function suitLabel(suit: Suit): string {

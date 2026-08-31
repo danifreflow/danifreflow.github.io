@@ -1,13 +1,13 @@
 <template>
   <div class="playing-card" :class="`playing-card--${card.suit}`">
-    <span class="playing-card__corner playing-card__corner--tl">{{ rankLabel(card.number) }}</span>
+    <span class="playing-card__corner playing-card__corner--tl">{{ cornerLabel }}</span>
     <SuitIcon :suit="card.suit" :size="18" class="playing-card__corner-icon playing-card__corner-icon--tl" />
 
     <div class="playing-card__center">
       <SuitIcon :suit="card.suit" :size="64" />
     </div>
 
-    <span class="playing-card__corner playing-card__corner--br">{{ rankLabel(card.number) }}</span>
+    <span class="playing-card__corner playing-card__corner--br">{{ cornerLabel }}</span>
     <SuitIcon :suit="card.suit" :size="18" class="playing-card__corner-icon playing-card__corner-icon--br" />
 
     <p class="playing-card__name">{{ suitLabel(card.suit) }}</p>
@@ -15,11 +15,15 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import SuitIcon from '@/components/SuitIcon.vue'
 import type { Card } from '@/types/game'
 import { rankLabel, suitLabel } from '@/utils/cards'
 
-defineProps<{ card: Card }>()
+const props = defineProps<{ card: Card }>()
+
+const cornerLabel = computed(() => (props.card.suit === 'joker' ? '★' : rankLabel(props.card.number)))
 </script>
 
 <style scoped>
@@ -96,5 +100,8 @@ defineProps<{ card: Card }>()
 }
 .playing-card--bastos {
   color: #2e7d32;
+}
+.playing-card--joker {
+  color: #8e24aa;
 }
 </style>

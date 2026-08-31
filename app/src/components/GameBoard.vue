@@ -1,6 +1,9 @@
 <template>
   <div class="game-board">
     <header class="game-board__header">
+      <p class="caption" :class="{ 'game-board__mode--full-nelson': state.mode === 'full_nelson' }">
+        Modo: {{ state.mode === 'full_nelson' ? 'Full Nelson' : 'Normal' }}
+      </p>
       <p class="caption">Quedan {{ state.cards_remaining }} de {{ state.total_cards }} cartas</p>
       <p v-if="state.current_player" class="body-lg">
         Turno de <strong>{{ state.current_player }}</strong>
@@ -58,6 +61,10 @@ const emit = defineEmits<{
 
 .game-board__header p {
   margin: 0;
+}
+
+.game-board__mode--full-nelson {
+  color: #8e24aa;
 }
 
 .game-board__table {

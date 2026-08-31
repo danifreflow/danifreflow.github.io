@@ -9,13 +9,13 @@
 import GameBoard from '@/components/GameBoard.vue'
 import PlayerSetup from '@/components/PlayerSetup.vue'
 import { useGame } from '@/composables/useGame'
-import type { GuessDirection } from '@/types/game'
+import type { GameMode, GuessDirection } from '@/types/game'
 
 const { state, loading, error, startGame, guess, resetGame } = useGame()
 
-async function handleStart(players: string[]): Promise<void> {
+async function handleStart(players: string[], mode: GameMode): Promise<void> {
   try {
-    await startGame(players)
+    await startGame(players, mode)
   } catch {
     // el error ya queda reflejado en el estado del composable
   }

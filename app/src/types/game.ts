@@ -10,7 +10,9 @@ export type Outcome =
   | 'igual_acierto'
   | 'igual_fallo'
 
-export type Suit = 'oros' | 'copas' | 'espadas' | 'bastos'
+export type Suit = 'oros' | 'copas' | 'espadas' | 'bastos' | 'joker'
+
+export type GameMode = 'normal' | 'full_nelson'
 
 export interface Card {
   suit: Suit
@@ -42,6 +44,7 @@ export interface RoundResult {
 
 export interface GameState {
   id: string
+  mode: GameMode
   players: string[]
   current_player: string | null
   top_card: Card

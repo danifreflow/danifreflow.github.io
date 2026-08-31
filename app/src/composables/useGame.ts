@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 
 import { Game, GameError } from '@/game/engine'
-import type { GameState, GuessDirection } from '@/types/game'
+import type { GameMode, GameState, GuessDirection } from '@/types/game'
 
 export function useGame() {
   const state = ref<GameState | null>(null)
@@ -12,10 +12,10 @@ export function useGame() {
   const lastRound = computed(() => state.value?.last_round ?? null)
   const isFinished = computed(() => state.value?.finished ?? false)
 
-  async function startGame(players: string[]): Promise<void> {
+  async function startGame(players: string[], mode: GameMode = 'normal'): Promise<void> {
     error.value = null
     try {
-      game = new Game(players)
+      game = new Game(players, mode)
       state.value = game.toState()
     } catch (err) {
       error.value = err instanceof GameError ? err.message : 'No se pudo crear la partida.'

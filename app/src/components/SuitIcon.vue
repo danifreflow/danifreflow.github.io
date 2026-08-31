@@ -16,8 +16,14 @@
       <rect x="8" y="10.4" width="8" height="1.6" rx="0.8" fill="currentColor" />
       <path d="M12 18.4 13.6 21H10.4L12 18.4Z" fill="currentColor" />
     </template>
-    <template v-else>
+    <template v-else-if="suit === 'bastos'">
       <rect x="10.6" y="2" width="2.8" height="20" rx="1.4" fill="currentColor" transform="rotate(20 12 12)" />
+    </template>
+    <template v-else>
+      <path
+        d="M12 2l2.9 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 7.1-1.01L12 2Z"
+        fill="currentColor"
+      />
     </template>
   </svg>
 </template>
@@ -43,5 +49,8 @@ withDefaults(defineProps<{ suit: Suit; size?: number }>(), { size: 28 })
 }
 .suit-icon--bastos {
   color: #2e7d32;
+}
+.suit-icon--joker {
+  color: #8e24aa;
 }
 </style>
