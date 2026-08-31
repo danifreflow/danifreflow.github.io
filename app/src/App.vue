@@ -2,10 +2,12 @@
   <main class="app-shell">
     <PlayerSetup v-if="!state" :loading="loading" :error="error" @start="handleStart" />
     <GameBoard v-else :state="state" :loading="loading" :error="error" @guess="handleGuess" @restart="resetGame" />
+    <FullNelsonPlayer v-if="state && state.mode === 'full_nelson'" :key="state.id" />
   </main>
 </template>
 
 <script setup lang="ts">
+import FullNelsonPlayer from '@/components/FullNelsonPlayer.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import PlayerSetup from '@/components/PlayerSetup.vue'
 import { useGame } from '@/composables/useGame'
