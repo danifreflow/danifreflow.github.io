@@ -24,7 +24,9 @@ import type { Card, Suit } from '@/types/game'
 import type { HorseState, RaceEvent, RaceState, TrackSlot } from '@/types/horseRace'
 
 const HORSE_NUMBER = 11
-export const TRACK_LENGTH = 7
+// 8 es el máximo fiable con la baraja de 48: en simulación, con 8 el 100% de
+// las carreras termina con un ganador real; con 9 baja a ~92%, con 10 a ~49%.
+export const TRACK_LENGTH = 8
 
 export class RaceError extends Error {}
 

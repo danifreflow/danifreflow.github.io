@@ -139,11 +139,11 @@
           (uno de cada palo): son las fichas de carrera y arrancan en la línea de salida.
         </li>
         <li>
-          Se reparten al azar 7 cartas más, en fila, formando la <strong>pista</strong> — quedan
+          Se reparten al azar 8 cartas más, en fila, formando la <strong>pista</strong> — quedan
           boca abajo hasta que un caballo pasa por ellas.
         </li>
         <li>
-          Con las 37 cartas restantes se saca una a una (se ve la carta que sale): el caballo del
+          Con las 36 cartas restantes se saca una a una (se ve la carta que sale): el caballo del
           mismo palo que la carta avanza una posición en la pista.
         </li>
         <li>
@@ -151,7 +151,7 @@
           (los 4 van, como mínimo, una casilla por delante de ella), esa carta se revela y el
           caballo de ese palo retrocede una posición.
         </li>
-        <li>Gana el primer caballo que completa las 7 posiciones y sale de la pista.</li>
+        <li>Gana el primer caballo que completa las 8 posiciones y sale de la pista.</li>
         <li>
           Antes de arrancar, cada jugador apuesta unos tragos a un caballo. Si tu caballo pierde,
           te bebes lo apostado; si gana, puedes repartir esos tragos entre los demás.
