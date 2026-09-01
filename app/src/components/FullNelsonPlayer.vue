@@ -101,4 +101,31 @@ function toggleMute(): void {
   letter-spacing: var(--tracking-caption);
   flex-shrink: 0;
 }
+
+/* En pantallas estrechas, el reproductor pasa a la esquina superior
+   izquierda (la inferior derecha la ocupan los botones de apuesta) y se
+   reduce a lo mínimo: solo la miniatura y el botón de silenciar. */
+@media (max-width: 480px) {
+  .fn-player {
+    top: var(--sp-4);
+    bottom: auto;
+    left: var(--sp-4);
+    right: auto;
+    align-items: flex-start;
+  }
+
+  .fn-player__frame {
+    width: 88px;
+    height: 50px;
+  }
+
+  .fn-player__label {
+    display: none;
+  }
+
+  .fn-player__controls {
+    max-width: none;
+    padding: var(--sp-1);
+  }
+}
 </style>

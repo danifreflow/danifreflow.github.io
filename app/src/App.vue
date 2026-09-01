@@ -43,4 +43,10 @@ async function handleGuess(direction: GuessDirection): Promise<void> {
   padding: var(--sp-6);
   background: linear-gradient(160deg, var(--bg-soft), var(--bg));
 }
+
+@media (max-width: 480px) {
+  .app-shell {
+    padding: var(--sp-4) var(--sp-3);
+  }
+}
 </style>

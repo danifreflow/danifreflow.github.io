@@ -65,8 +65,13 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--bg);
   transition: background var(--dur-base) var(--ease-standard);
 }
@@ -117,4 +122,11 @@ input {
   background: var(--brand-blue-strong);
   color: var(--fg-inverse);
   box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: var(--sp-3) var(--sp-4);
+    font-size: var(--fs-body-lg);
+  }
 }

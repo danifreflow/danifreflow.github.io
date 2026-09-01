@@ -49,6 +49,7 @@ const emit = defineEmits<{
 .game-board {
   width: 100%;
   max-width: 480px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,6 +81,13 @@ const emit = defineEmits<{
 
 .game-board__actions .btn {
   flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 480px) {
+  .game-board__actions {
+    gap: var(--sp-2);
+  }
 }
 
 .btn--mayor {

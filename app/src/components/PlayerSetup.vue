@@ -1,6 +1,6 @@
 <template>
   <div class="player-setup">
-    <h1 class="display-lg">Mayor o Menor</h1>
+    <h1 class="display-lg player-setup__title">Mayor o Menor</h1>
     <p class="body-lg player-setup__subtitle">El juego de beber con la baraja española</p>
 
     <div class="player-setup__mode" role="radiogroup" aria-label="Modo de juego">
@@ -159,11 +159,16 @@ function handleSubmit(): void {
 .player-setup {
   width: 100%;
   max-width: 480px;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--sp-5);
   text-align: center;
+}
+
+.player-setup__title {
+  font-size: var(--fs-display-lg);
 }
 
 .player-setup__subtitle {
@@ -202,6 +207,22 @@ function handleSubmit(): void {
   background: #8e24aa;
 }
 
+@media (max-width: 480px) {
+  .player-setup__title {
+    font-size: 44px;
+  }
+
+  .mode-btn {
+    padding: var(--sp-2) var(--sp-3);
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .player-setup__rules {
+    padding: var(--sp-4);
+  }
+}
+
 .player-setup__form {
   width: 100%;
   display: flex;
@@ -216,6 +237,7 @@ function handleSubmit(): void {
 
 .player-setup__input {
   flex: 1;
+  min-width: 0;
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--r-md);
   border: 1px solid var(--border);
