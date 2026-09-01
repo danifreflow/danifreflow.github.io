@@ -4,6 +4,13 @@
       <p class="caption">Quedan {{ race.cardsRemaining }} de {{ race.totalCards }} cartas</p>
     </header>
 
+    <div class="race-current-card">
+      <PlayingCard v-if="race.lastEvent" :card="race.lastEvent.drawnCard" />
+      <div v-else class="race-current-card__placeholder">
+        <p class="body-sm">Pulsa «Sacar carta» para arrancar</p>
+      </div>
+    </div>
+
     <div class="race-track">
       <div v-for="slot in race.track" :key="slot.index" class="race-track__slot">
         <img
@@ -21,12 +28,12 @@
           <div
             class="race-lane__horse"
             :class="{ 'race-lane__horse--winner': race.winner === horse.suit }"
-            :style="{ left: `${(horse.position / 10) * 100}%` }"
+            :style="{ left: `${(horse.position / race.track.length) * 100}%` }"
           >
             <img :src="cardImageUrl(`11_${horse.suit}`)" :alt="`Caballo de ${suitLabel(horse.suit)}`" />
           </div>
         </div>
-        <span class="race-lane__position caption">{{ horse.position }}/10</span>
+        <span class="race-lane__position caption">{{ horse.position }}/{{ race.track.length }}</span>
       </div>
     </div>
 
@@ -85,6 +92,7 @@
 import { computed, reactive } from 'vue'
 
 import DrinkTally from '@/components/DrinkTally.vue'
+import PlayingCard from '@/components/PlayingCard.vue'
 import SuitIcon from '@/components/SuitIcon.vue'
 import { cardImageUrl } from '@/game/cardImages'
 import { suitLabel } from '@/game/deck'
@@ -144,6 +152,24 @@ function handleDistribute(winner: PlayerBet): void {
 
 .horse-race__header p {
   margin: 0;
+}
+
+.race-current-card {
+  display: flex;
+  justify-content: center;
+}
+
+.race-current-card__placeholder {
+  width: 190px;
+  aspect-ratio: 208 / 319;
+  border-radius: var(--r-lg);
+  border: 1px dashed var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+  text-align: center;
+  color: var(--fg-muted);
 }
 
 .race-track {

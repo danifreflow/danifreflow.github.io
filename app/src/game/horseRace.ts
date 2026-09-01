@@ -4,18 +4,18 @@
  * Reglas:
  * - Se usa la baraja española completa de 48 cartas (incluye 8 y 9): con la
  *   baraja de 40 solo quedan 9 cartas de cada palo tras sacar el caballo, y
- *   nunca se podría completar una pista de 10 posiciones. Con 48 quedan 11.
+ *   la pista sería mucho más difícil de completar. Con 48 quedan 11.
  * - Los 4 caballos (los "11" de cada palo) se sacan de la baraja: son las
  *   fichas de carrera, empiezan en la posición 0 (línea de salida).
- * - Se reparten al azar 10 cartas más (fuera del resto del mazo) formando la
- *   pista, en fila, boca abajo.
- * - Con las 34 cartas restantes se va sacando una a una: el caballo del
- *   mismo palo que la carta avanza una posición.
+ * - Se reparten al azar TRACK_LENGTH cartas más (fuera del resto del mazo)
+ *   formando la pista, en fila, boca abajo.
+ * - Con las cartas restantes se va sacando una a una: el caballo del mismo
+ *   palo que la carta avanza una posición.
  * - Cuando un caballo llega (por primera vez) a una posición de la pista, esa
  *   carta se levanta: el caballo cuyo palo coincida con el de esa carta
  *   retrocede una posición (puede ser el mismo caballo que acaba de avanzar).
- * - Gana el primer caballo que completa las 10 posiciones (sale de la pista).
- *   Si se acaban las cartas antes de eso, gana el caballo más adelantado.
+ * - Gana el primer caballo que completa la pista (sale de ella). Si se acaban
+ *   las cartas antes de eso, gana el caballo más adelantado.
  */
 
 import { ALL_NUMBERS, buildDeck, createId, shuffle, SUITS } from '@/game/deck'
@@ -23,7 +23,7 @@ import type { Card, Suit } from '@/types/game'
 import type { HorseState, RaceEvent, RaceState, TrackSlot } from '@/types/horseRace'
 
 const HORSE_NUMBER = 11
-const TRACK_LENGTH = 10
+export const TRACK_LENGTH = 7
 
 export class RaceError extends Error {}
 
