@@ -35,3 +35,11 @@ cp -r dist/. ..
 ```
 
 Luego commitea y pushea el contenido de `app/` junto con los ficheros regenerados en la raíz.
+
+## Créditos
+
+Las imágenes de las cartas (`app/src/assets/cards/*.png`) son un recorte de
+[Baraja española completa](https://commons.wikimedia.org/wiki/File:Baraja_espa%C3%B1ola_completa.png),
+de **Basquetteur**, con licencia
+[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.es). Al ser
+"compartir igual", estos recortes se distribuyen bajo la misma licencia.
