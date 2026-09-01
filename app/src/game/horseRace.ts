@@ -11,9 +11,10 @@
  *   formando la pista, en fila, boca abajo.
  * - Con las cartas restantes se va sacando una a una: el caballo del mismo
  *   palo que la carta avanza una posición.
- * - Cuando un caballo llega (por primera vez) a una posición de la pista, esa
- *   carta se levanta: el caballo cuyo palo coincida con el de esa carta
- *   retrocede una posición (puede ser el mismo caballo que acaba de avanzar).
+ * - La pista se destapa por detrás: cuando los 4 caballos han superado ya una
+ *   posición (los 4 están, como mínimo, una casilla por delante de ella), esa
+ *   carta se levanta y el caballo cuyo palo coincida con el de esa carta
+ *   retrocede una posición (puede ser el mismo caballo que la ha destapado).
  * - Gana el primer caballo que completa la pista (sale de ella). Si se acaban
  *   las cartas antes de eso, gana el caballo más adelantado.
  */
@@ -76,7 +77,11 @@ export class HorseRace {
     let triggeredReveal: TrackSlot | null = null
     let setbackHorse: Suit | null = null
 
-    const slot = this.track.find((s) => s.index === horse.position && !s.revealed)
+    // La pista se destapa por detrás: la posición N se revela cuando el
+    // caballo más rezagado ya la ha superado, es decir, cuando los 4 están
+    // como mínimo en la posición N+1.
+    const minPosition = Math.min(...this.horses.map((h) => h.position))
+    const slot = this.track.find((s) => s.index === minPosition - 1 && !s.revealed)
     if (slot) {
       slot.revealed = true
       triggeredReveal = slot

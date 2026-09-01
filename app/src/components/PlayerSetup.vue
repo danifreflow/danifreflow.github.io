@@ -147,9 +147,9 @@
           mismo palo que la carta avanza una posición en la pista.
         </li>
         <li>
-          Cuando un caballo llega a una posición de la pista por primera vez, esa carta se
-          revela: el caballo de ese palo (puede ser el mismo que acaba de avanzar) retrocede una
-          posición.
+          La pista se destapa por detrás: cuando los 4 caballos ya han superado una posición
+          (los 4 van, como mínimo, una casilla por delante de ella), esa carta se revela y el
+          caballo de ese palo retrocede una posición.
         </li>
         <li>Gana el primer caballo que completa las 7 posiciones y sale de la pista.</li>
         <li>
