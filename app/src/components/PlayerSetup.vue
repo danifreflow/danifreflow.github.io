@@ -22,6 +22,15 @@
       >
         Full Nelson
       </button>
+      <button
+        type="button"
+        class="mode-btn mode-btn--carrera"
+        :class="{ 'mode-btn--active': mode === 'carrera_caballos' }"
+        :aria-pressed="mode === 'carrera_caballos'"
+        @click="mode = 'carrera_caballos'"
+      >
+        Carrera de caballos
+      </button>
     </div>
 
     <form class="player-setup__form" @submit.prevent="handleSubmit">
@@ -53,9 +62,9 @@
       </ul>
 
       <button type="submit" class="btn btn--primary player-setup__start" :disabled="loading">
-        {{ loading ? 'Barajando…' : 'Empezar partida' }}
+        {{ loading ? 'Barajando…' : startLabel }}
       </button>
-      <p v-if="error" class="player-setup__error body-sm">{{ error }}</p>
+      <p v-if="displayedError" class="player-setup__error body-sm">{{ displayedError }}</p>
     </form>
 
     <section class="player-setup__rules">
@@ -87,7 +96,7 @@
         </li>
       </ul>
 
-      <ul v-else class="body-sm">
+      <ul v-else-if="mode === 'full_nelson'" class="body-sm">
         <li>
           <strong>Full Nelson:</strong> mismas reglas que el modo normal, pero
           <strong>todas las cantidades de tragos se duplican</strong>.
@@ -123,21 +132,50 @@
           exactamente 10 tragos, sin sumar nada más.
         </li>
       </ul>
+
+      <ul v-else class="body-sm">
+        <li>
+          Se usa la baraja española completa de 48 cartas. Se sacan los 4 <strong>caballos</strong>
+          (uno de cada palo): son las fichas de carrera y arrancan en la línea de salida.
+        </li>
+        <li>
+          Se reparten al azar 10 cartas más, en fila, formando la <strong>pista</strong> — quedan
+          boca abajo hasta que un caballo pasa por ellas.
+        </li>
+        <li>
+          Con las 34 cartas restantes se saca una a una: el caballo del mismo palo que la carta
+          avanza una posición en la pista.
+        </li>
+        <li>
+          Cuando un caballo llega a una posición de la pista por primera vez, esa carta se
+          revela: el caballo de ese palo (puede ser el mismo que acaba de avanzar) retrocede una
+          posición.
+        </li>
+        <li>Gana el primer caballo que completa las 10 posiciones y sale de la pista.</li>
+        <li>
+          Antes de arrancar, cada jugador apuesta unos tragos a un caballo. Si tu caballo pierde,
+          te bebes lo apostado; si gana, puedes repartir esos tragos entre los demás.
+        </li>
+      </ul>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
-import type { GameMode } from '@/types/game'
+import type { AppMode } from '@/types/game'
 
-defineProps<{ loading: boolean; error: string | null }>()
-const emit = defineEmits<{ (e: 'start', players: string[], mode: GameMode): void }>()
+const props = defineProps<{ loading: boolean; error: string | null }>()
+const emit = defineEmits<{ (e: 'start', players: string[], mode: AppMode): void }>()
 
 const draftName = ref('')
 const players = ref<string[]>([])
-const mode = ref<GameMode>('normal')
+const mode = ref<AppMode>('normal')
+const validationError = ref<string | null>(null)
+
+const startLabel = computed(() => (mode.value === 'carrera_caballos' ? 'Elegir caballo y apuesta' : 'Empezar partida'))
+const displayedError = computed(() => validationError.value ?? props.error)
 
 function addPlayer(): void {
   const name = draftName.value.trim()
@@ -151,6 +189,11 @@ function removePlayer(index: number): void {
 }
 
 function handleSubmit(): void {
+  if (mode.value === 'carrera_caballos' && players.value.length === 0) {
+    validationError.value = 'Añade al menos un jugador para poder apostar.'
+    return
+  }
+  validationError.value = null
   emit('start', players.value, mode.value)
 }
 </script>
@@ -177,10 +220,12 @@ function handleSubmit(): void {
 
 .player-setup__mode {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--sp-2);
   background: var(--bg-soft);
-  padding: var(--sp-1);
-  border-radius: var(--r-pill);
+  padding: var(--sp-2);
+  border-radius: var(--r-lg);
 }
 
 .mode-btn {
@@ -205,6 +250,10 @@ function handleSubmit(): void {
 
 .mode-btn--full-nelson.mode-btn--active {
   background: #8e24aa;
+}
+
+.mode-btn--carrera.mode-btn--active {
+  background: #2e7d32;
 }
 
 @media (max-width: 480px) {

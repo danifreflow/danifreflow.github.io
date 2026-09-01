@@ -14,6 +14,9 @@ export type Suit = 'oros' | 'copas' | 'espadas' | 'bastos' | 'joker'
 
 export type GameMode = 'normal' | 'full_nelson'
 
+/** Modo elegido en la pantalla inicial: incluye juegos con motor propio. */
+export type AppMode = GameMode | 'carrera_caballos'
+
 export interface Card {
   suit: Suit
   number: number

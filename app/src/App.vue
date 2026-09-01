@@ -1,9 +1,31 @@
 <template>
   <main class="app-shell">
     <ThemeToggle />
-    <PlayerSetup v-if="!state" :loading="loading" :error="error" @start="handleStart" />
-    <GameBoard v-else :state="state" :loading="loading" :error="error" @guess="handleGuess" @restart="resetGame" />
+
+    <PlayerSetup v-if="showSetup" :loading="loading" :error="error" @start="handleStart" />
+
+    <HorseBetting
+      v-else-if="racePlayers"
+      :players="racePlayers"
+      @confirm="handleRaceConfirm"
+      @cancel="racePlayers = null"
+    />
+
+    <HorseRaceBoard
+      v-else-if="race"
+      :race="race"
+      :bets="raceBets"
+      :drinks="raceDrinks"
+      :error="raceError"
+      @draw="drawRaceCard"
+      @distribute="distribute"
+      @restart="resetRace"
+    />
+
+    <GameBoard v-else-if="state" :state="state" :loading="loading" :error="error" @guess="handleGuess" @restart="resetGame" />
+
     <FullNelsonPlayer v-if="state && state.mode === 'full_nelson'" :key="state.id" />
+
     <footer class="app-credits">
       Cartas:
       <a
@@ -21,21 +43,50 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref } from 'vue'
+
 import FullNelsonPlayer from '@/components/FullNelsonPlayer.vue'
 import GameBoard from '@/components/GameBoard.vue'
+import HorseBetting from '@/components/HorseBetting.vue'
+import HorseRaceBoard from '@/components/HorseRaceBoard.vue'
 import PlayerSetup from '@/components/PlayerSetup.vue'
 import ThemeToggle from '@/components/ThemeToggle.vue'
 import { useGame } from '@/composables/useGame'
-import type { GameMode, GuessDirection } from '@/types/game'
+import { useHorseRace } from '@/composables/useHorseRace'
+import type { AppMode, GuessDirection } from '@/types/game'
+import type { PlayerBet } from '@/types/horseRace'
 
 const { state, loading, error, startGame, guess, resetGame } = useGame()
+const {
+  race,
+  bets: raceBets,
+  drinks: raceDrinks,
+  error: raceError,
+  startRace,
+  draw: drawRaceCard,
+  distribute,
+  reset: resetRace,
+} = useHorseRace()
 
-async function handleStart(players: string[], mode: GameMode): Promise<void> {
+const racePlayers = ref<string[] | null>(null)
+
+const showSetup = computed(() => !state.value && !racePlayers.value && !race.value)
+
+async function handleStart(players: string[], mode: AppMode): Promise<void> {
+  if (mode === 'carrera_caballos') {
+    racePlayers.value = players
+    return
+  }
   try {
     await startGame(players, mode)
   } catch {
     // el error ya queda reflejado en el estado del composable
   }
+}
+
+function handleRaceConfirm(playerBets: PlayerBet[]): void {
+  racePlayers.value = null
+  startRace(playerBets)
 }
 
 async function handleGuess(direction: GuessDirection): Promise<void> {

@@ -24,47 +24,13 @@
  * que funciona como una carta evento más.
  */
 
-import type {
-  Card,
-  GameEvent,
-  GameMode,
-  GameState,
-  GuessDirection,
-  Outcome,
-  RoundResult,
-  Suit,
-} from '@/types/game'
-
-const SUITS: Suit[] = ['oros', 'copas', 'espadas', 'bastos']
-const NUMBERS: number[] = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12]
+import { buildDeck as buildStandardDeck, createId, shuffle } from '@/game/deck'
+import type { Card, GameEvent, GameMode, GameState, GuessDirection, Outcome, RoundResult } from '@/types/game'
 
 // Hueco sin usar en la numeración real de la baraja (1-7, 10-12): perfecto
 // para que el comodín compare de forma natural sin colisionar con ninguna carta.
 const JOKER_NUMBER = 8
 const JOKER_LABEL = 'Popo-popo-per'
-
-const SUIT_LABELS: Record<Suit, string> = {
-  oros: 'Oros',
-  copas: 'Copas',
-  espadas: 'Espadas',
-  bastos: 'Bastos',
-  joker: JOKER_LABEL,
-}
-
-const NUMBER_LABELS: Record<number, string> = { 1: 'As', 10: 'Sota', 11: 'Caballo', 12: 'Rey' }
-
-function rankLabel(number: number): string {
-  return NUMBER_LABELS[number] ?? String(number)
-}
-
-function makeCard(suit: Suit, number: number): Card {
-  return {
-    suit,
-    number,
-    label: `${rankLabel(number)} de ${SUIT_LABELS[suit]}`,
-    code: `${number}_${suit}`,
-  }
-}
 
 function makeJokerCard(): Card {
   return {
@@ -76,25 +42,11 @@ function makeJokerCard(): Card {
 }
 
 function buildDeck(mode: GameMode): Card[] {
-  const deck: Card[] = []
-  for (const suit of SUITS) {
-    for (const number of NUMBERS) {
-      deck.push(makeCard(suit, number))
-    }
-  }
+  const deck = buildStandardDeck()
   if (mode === 'full_nelson') {
     deck.push(makeJokerCard())
   }
   return deck
-}
-
-function shuffle<T>(items: T[]): T[] {
-  const shuffled = [...items]
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
-  }
-  return shuffled
 }
 
 // Valores del modo normal. En modo "full_nelson" se multiplican x2 (ver
@@ -171,13 +123,6 @@ const EVENT_CARDS: Record<string, EventDef> = {
 function checkEvents(card: Card): GameEvent[] {
   const event = EVENT_CARDS[card.code]
   return event ? [{ code: event.code, title: event.title, message: event.message, drinks: event.drinks }] : []
-}
-
-function createId(): string {
-  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
-    return crypto.randomUUID()
-  }
-  return `${Date.now()}-${Math.random().toString(36).slice(2)}`
 }
 
 export class GameError extends Error {}
